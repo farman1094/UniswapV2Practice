@@ -8,7 +8,7 @@ import {IUniswapV2Router02} from "v2-periphery/contracts/interfaces/IUniswapV2Ro
 import {WETH, DAI, MKR, UNISWAP_V2_ROUTER_02 } from "src/constants.sol";
 import {IWETH} from "src/interface/IWETH.sol";
 
-contract UniSwapV2SwapTest is Test {
+contract IssueInTest is Test {
 
 IUniswapV2Router02 public router = IUniswapV2Router02(UNISWAP_V2_ROUTER_02);
 IWETH public weth = IWETH(WETH);
@@ -28,7 +28,7 @@ function setUp() public  {
     vm.stopPrank(); 
     
 }
-        function testSwapExactTokensForTokens() public {
+        function testSwapExactTokensForIssues() public {
             address[] memory path = new address[](3);
             path[0] = WETH;
             path[1] = DAI;
@@ -36,6 +36,7 @@ function setUp() public  {
             uint deadline = block.timestamp + 1000;
             uint amountIn = 1e18;
             uint amountOutMin = 1;
+
             vm.prank(user);
             uint[] memory amounts = router.swapExactTokensForTokens(
                 amountIn,
@@ -45,21 +46,10 @@ function setUp() public  {
                 deadline
             );
 
-            console.log("amounts: WETH", amounts[0]);    
-            console.log("amounts: DAI", amounts[1]);    
-            console.log("amounts: MKR", amounts[2]);    
-        }
-
-        function testSwapTokensForExactTokens() public {
-            address[] memory path = new address[](3);
-            path[0] = WETH;
-            path[1] = DAI;
-            path[2] = MKR;
-            uint deadline = block.timestamp + 1000;
             uint amountOut = 1e17;
-            uint amountInMax = 1e18;
+            uint amountInMax = 50e18;
             vm.prank(user);
-            uint[] memory amounts = router.swapTokensForExactTokens(
+            uint[] memory amountsOut = router.swapTokensForExactTokens(
                 amountOut,
                 amountInMax,
                 path,
@@ -72,3 +62,38 @@ function setUp() public  {
             console.log("amounts: MKR", amounts[2]);    
         }
 }
+
+
+/* @NOTE Working in this order
+
+        function testSwapExactTokensForIssues() public {
+            address[] memory path = new address[](3);
+            path[0] = WETH;
+            path[1] = DAI;
+            path[2] = MKR;
+            uint deadline = block.timestamp + 1000;
+            uint amountIn = 1e18;
+            uint amountOutMin = 1;
+
+
+            uint amountOut = 1e17;
+            uint amountInMax = 50e18;
+            vm.prank(user);
+            uint[] memory amountsOut = router.swapTokensForExactTokens(
+                amountOut,
+                amountInMax,
+                path,
+                user,
+                deadline
+            );
+
+
+            vm.prank(user);
+            uint[] memory amounts = router.swapExactTokensForTokens(
+                amountIn,
+                amountOutMin,
+                path,
+                user,
+                deadline
+            );
+*/
