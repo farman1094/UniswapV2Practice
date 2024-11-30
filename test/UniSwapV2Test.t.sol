@@ -3,11 +3,11 @@ pragma solidity 0.8.24;
 import {Test} from "forge-std/Test.sol";
 import {console} from "forge-std/console.sol";
 
-import {IERC20} from "lib/forge-std/src/interfaces/IERC20.sol";
+import {IERC20} from "@openzeppelin/contracts/interfaces/IERC20.sol";
 import {IUniswapV2Router02} from "v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import {IUniswapV2Factory} from "v2-core/contracts/interfaces/IUniswapV2Factory.sol";
 import {IUniswapV2Pair} from "v2-core/contracts/interfaces/IUniswapV2Pair.sol";
-import {UNISWAP_V2_FACTORY, WETH, DAI, MKR, UNISWAP_V2_ROUTER_02 } from "src/constants.sol";
+import {UNISWAP_V2_FACTORY, WETH, DAI, MKR, UNISWAP_V2_ROUTER_02 , UNISWAP_V2_PAIR_DAI_WETH} from "src/constants.sol";
 import {IWETH} from "src/interface/IWETH.sol";
 import {ERC20Mock} from "@openzeppelin/contracts/mocks/token/ERC20Mock.sol";
 import {FlashSwap} from "./FlashSwap.sol";
@@ -36,10 +36,12 @@ function setUp() public  {
 }
 
 
-function testFlashSwap() public {
+function testFlashSwa1p() public {
+    vm.startPrank(user);
     FlashSwap flashSwap = new FlashSwap();
+    deal(DAI, user,1000e18);
+    dai.approve(address(flashSwap), type(uint256).max);
     flashSwap.flashSwap(DAI, 100e18);
-
 }
 
 

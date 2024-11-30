@@ -3,7 +3,7 @@ pragma solidity 0.8.24;
 import {Test} from "forge-std/Test.sol";
 import {console} from "forge-std/console.sol";
 
-import {IERC20} from "lib/forge-std/src/interfaces/IERC20.sol";
+import {IERC20} from "@openzeppelin/contracts/interfaces/IERC20.sol";
 import {IUniswapV2Router02} from "v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import {WETH, DAI, MKR, UNISWAP_V2_ROUTER_02 } from "src/constants.sol";
 import {IWETH} from "src/interface/IWETH.sol";
