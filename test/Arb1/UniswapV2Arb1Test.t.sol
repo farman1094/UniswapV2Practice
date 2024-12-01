@@ -15,7 +15,6 @@ import {Test, console2} from "forge-std/Test.sol";
 import {IERC20} from "@openzeppelin/contracts/interfaces/IERC20.sol";
 import {IUniswapV2Router02} from "v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
 import {IUniswapV2Pair} from "v2-core/contracts/interfaces/IUniswapV2Pair.sol";
-import { WETH, DAI,  UNISWAP_V2_ROUTER_02 , UNISWAP_V2_PAIR_DAI_WETH} 
 
 // Test arbitrage between Uniswap and Sushiswap
 // Buy WETH on Uniswap, sell on Sushiswap.
